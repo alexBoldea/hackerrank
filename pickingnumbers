@@ -1,0 +1,21 @@
+def pickingNumbers(a):
+    max_length = []
+    for i in range(len(a)-1):
+        equals = [a[i]]
+        less = []
+        more = []
+        for j in range(i+1, len(a)):
+            if a[i]==a[j]:
+                equals.append(a[j])
+            elif a[i] == a[j]-1:
+                less.append(a[j])
+            elif a[i] == a[j]+1:
+                more.append(a[j])
+
+        max_length.append(max(len(equals)+len(less), len(equals)+len(more)))
+    if max_length:
+        return max(max_length)
+    else:
+        return 0
+
+print(pickingNumbers([4, 6, 5, 3, 3, 1]))
