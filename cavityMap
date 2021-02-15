@@ -1,0 +1,19 @@
+def cavityMap(grid):
+    n = len(grid)
+    replacements = []
+    for i in range(1, n-1):
+        grid[i] = list(grid[i])
+        for j in range(1, n-1):
+            if int(grid[i][j]) > int(grid[i-1][j]) and int(grid[i][j]) > int(grid[i+1][j]) and int(grid[i][j]) > int(grid[i][j-1]) and int(grid[i][j]) > int(grid[i][j+1]):
+                replacements.append((i, j))
+    for i in replacements:
+        grid[i[0]][i[1]] = 'X'
+        temp = ''
+        for j in grid[i[0]]:
+            temp += j
+        grid[i[0]] = temp
+    return grid
+
+input = ['1112', '1912', '1892', '1234']
+
+print(cavityMap(input))
