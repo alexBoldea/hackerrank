@@ -1,0 +1,15 @@
+def permutationEquation(p):
+    inter_dict = {}
+    for i in range(len(p)):
+        if i+1 == len(p):
+            inter_dict[len(p)] = p[-1]
+        else:
+            inter_dict[i+1] = p[i]
+    y = []
+    for x in range(1, len(p)+1):
+        for key in inter_dict.keys():
+            if x == inter_dict[inter_dict[key]]:
+                y.append(key)
+    return y
+
+print(permutationEquation([4, 3, 5, 1, 2]))
