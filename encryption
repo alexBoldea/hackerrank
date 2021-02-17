@@ -1,0 +1,42 @@
+import math
+
+def encryption(s):
+    ss = []
+    for i in s:
+        if i.isalpha():
+            ss.append(i)
+
+    l = len(ss)
+    rows = math.floor(math.sqrt(l))
+    cols = math.ceil(math.sqrt(l))
+
+    while rows * cols < l:
+        if rows < cols:
+            rows += 1
+        else:
+            cols += 1
+
+    bitterEnd = l % rows
+
+    matrix = []
+    while ss:
+        for i in range(rows):
+            matrix.append(ss[:cols])
+            ss = ss[cols:]
+
+    output = ''
+    for j in range(cols):
+        if j >= bitterEnd:
+            for i in range(rows):
+                try:
+                    output += matrix[i][j]
+                except:
+                    break
+        else:
+            for i in range(rows):
+                output += matrix[i][j]
+        output += ' '
+
+    return output.strip(' ')
+
+print(encryption('roqfqeylxuyxjfyqterizzkhgvngapvudnztsxeprfp'))
