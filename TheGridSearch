@@ -1,0 +1,15 @@
+def patternSearch(G, P):
+
+    iRange = len(G) - len(P) + 1 # integer of max. number of lines to search the first element
+    jRange = len(G[0]) - len(P[0]) + 1 # integer of max. number of columns to search the first element
+    # define slices
+    for i in range(0, iRange):
+        for j in range(0, jRange):
+            if G[i][j:j+len(P[0])] == P[0]:
+                sameLines = 1
+                for k in range(1, len(P)):
+                    if P[k] == G[i+k][j:j+len(P[0])]:
+                        sameLines += 1
+                if sameLines == len(P):
+                    return "YES"
+    return "NO"
