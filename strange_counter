@@ -1,0 +1,21 @@
+def strangeCounter(t):
+    to_find = t//3
+    start_point = 1
+    steps = 0
+    for i in range(100):
+        if to_find < start_point:
+            break
+        else:
+            start_point *= 2
+            start_point += 1
+            steps += 1
+
+    val_start = 3 * 2 ** steps
+    start_point = ((start_point - 1) // 2) * 3 + 1
+
+    if start_point > t:
+        val_t = 1
+    else:
+        val_t = val_start - (t - start_point)
+
+    return val_t
