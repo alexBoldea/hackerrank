@@ -1,0 +1,36 @@
+def bigSorting(unsorted):
+    if len(unsorted) == 1:
+        return unsorted
+    elif len(unsorted) == 2:
+        return unsorted if unsorted[0] <= unsorted[1] else unsorted[::-1]
+    else:
+        middle = len(unsorted)//2
+        half1 = unsorted[:middle]
+        half2 = unsorted[middle:]
+
+        half1sorted = bigSorting(half1)
+        half2sorted = bigSorting(half2)
+
+        allSorted = []
+        i = 0
+        j = 0
+
+        while i < len(half1) and j < len(half2):
+            if half1sorted[i] <= half2sorted[j]:
+                allSorted.append(half1sorted[i])
+                i += 1
+            else:
+                allSorted.append(half2sorted[j])
+                j += 1
+        while i < len(half1):
+            allSorted.append(half1sorted[i])
+            i += 1
+        while j < len(half2):
+            allSorted.append(half2sorted[j])
+            j += 1
+
+
+        return allSorted
+
+
+print(bigSorting([31415926535897932384626433832795, 1, 3, 10, 3, 5]))
