@@ -1,0 +1,24 @@
+def sort_it(n):
+    l = list(n)
+    s_low = [x for x in n if x.islower()]
+    s_low.sort()
+    s_up = [x for x in n if x.isupper()]
+    s_up.sort()
+    num = [x for x in l if x not in s_low and x not in s_up]
+    num_odd = [x for x in num if int(x)%2]
+    num_odd.sort()
+    num_even = [x for x in num if x not in num_odd]
+    num_even.sort()
+    output = ''
+    for i in s_low:
+        output += i
+    for i in s_up:
+        output += i
+    for i in num_odd:
+        output += i
+    for i in num_even:
+        output += i
+    print(output)
+
+
+sort_it('Sorting1234')
