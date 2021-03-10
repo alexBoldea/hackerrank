@@ -1,0 +1,26 @@
+import itertools
+
+def acmTeam(topic):
+    max_knowledge = 0
+    teams = []
+    subjects = len(topic[0])
+    perms = itertools.combinations(topic, 2)
+    for i in perms:
+        print(str(i[0]), str(i[1]))
+        knowledge = 0
+        for j in range(subjects):
+            if i[0][j] == '1' or i[1][j] == '1':
+                knowledge += 1
+        if knowledge > max_knowledge:
+            max_knowledge = knowledge
+        teams.append(knowledge)
+    great_sum = 0
+    great_max = max(teams)
+    for shm in teams:
+        if shm == great_max:
+            great_sum += 1
+    return [max_knowledge, great_sum]
+
+
+
+print(acmTeam(['10101','11100','11010','00101']))
