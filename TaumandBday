@@ -1,0 +1,14 @@
+def taumBday(b, w, bc, wc, z):
+    """
+    :param b: the number of black gifts
+    :param w: the number of white gifts
+    :param bc: the cost of a black gift
+    :param wc: the cost of a white gift
+    :param z: the cost to convert one color gift to the other color
+
+    :return: minimum cost of the gifts
+    """
+    if abs(bc - wc) < z:
+        return b*bc + w*wc
+    else:
+        return b*(wc+z) + w*wc if bc > wc else b*bc + w*(bc+z)
