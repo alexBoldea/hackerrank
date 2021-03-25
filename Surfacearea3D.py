@@ -25,5 +25,5 @@ def surfaceArea(A):
         for j in range(1, len(A)):
             colSurf += abs(A[j][i] - A[j-1][i])
     colSurf += sum(A[-1])
-    totalSurf = bottom + rowSurf + colSurf
+    totalSurf = bottom + rowSurf + colSurf # sum all
     return totalSurf
