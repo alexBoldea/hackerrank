@@ -1,0 +1,63 @@
+def bomberMan(n, grid):
+    """
+    will return the state of the grid after n steps.
+    step 1: bombs are in initial grid
+    step 2: rest of grid is filled
+    step 3: bombs from step 1 explode, clearing i+-1, j and i, j+-1 (also i, j)
+    step 4: grid is filled, config 4 becomes config 2
+    step 5: bombs remaining from step 3 explode, making a new config (set_to_blow)
+    step 6: grid is filled, config 6 becomes config 2 (full_board)
+    ..
+    :param n: number of steps - integer up to 10**9
+    :param grid: list of strings grid =['.......', '...O...', '....O..',\
+                                        '.......', 'OO.....', 'OO.....']
+    :return: list of strings after n steps
+    """
+    full_board = [] # list of lists, to be converted to strings
+    for i in grid:
+        line = []
+        for j in range(len(i)):
+            line.append('0')
+        full_board.append(line)
+    set_to_blow = [] # list of lists, to be converted to strings
+    for i in grid:
+        line = []
+        for j in i:
+            line.append(j)
+        set_to_blow.append(line)
+    if n <= 0:
+        return 0
+    elif not n % 2:
+        answer = []
+        for i in full_board:
+            answer.append(''.join(i))
+        return answer
+    elif n == 1:
+        return grid
+    else:
+        temp = set_to_blow[:]
+        for _ in range(3, n+1, 2):
+            for i in range(len(set_to_blow)):
+                for j in range(len(set_to_blow[i])):                    
+                    if set_to_blow[i][j] == 0:
+                        try:
+                            set_to_blow[i-1][j] = '.'
+                        except IndexError:
+                            continue
+                        set_to_blow[i][j] = '.'
+                        try:
+                            set_to_blow[i+1][j] = '.'
+                        except IndexError:
+                            continue
+                        try:
+                            set_to_blow[i][j-1] = '.'
+                        except IndexError:
+                            continue
+                        try:
+                            set_to_blow[i][j+1] = '.'
+                        except IndexError:
+                            continue
+                
+                        
+                            
+            
