@@ -1,3 +1,5 @@
+import copy
+
 def bomberMan(n, grid):
     """
     will return the state of the grid after n steps.
@@ -17,7 +19,7 @@ def bomberMan(n, grid):
     for i in grid:
         line = []
         for j in range(len(i)):
-            line.append('0')
+            line.append('O')
         full_board.append(line)
     set_to_blow = [] # list of lists, to be converted to strings
     for i in grid:
@@ -35,29 +37,30 @@ def bomberMan(n, grid):
     elif n == 1:
         return grid
     else:
-        temp = set_to_blow[:]
         for _ in range(3, n+1, 2):
+            temp = copy.deepcopy(full_board)
             for i in range(len(set_to_blow)):
-                for j in range(len(set_to_blow[i])):                    
-                    if set_to_blow[i][j] == 0:
+                if 'O' not in set_to_blow[i]:
+                    continue
+                for j in range(len(set_to_blow[i])):
+                    if set_to_blow[i][j] == 'O':
+                        if i >= 1:
+                            temp[i-1][j] = '.'
+                        temp[i][j] = '.'
                         try:
-                            set_to_blow[i-1][j] = '.'
+                            temp[i+1][j] = '.'
                         except IndexError:
-                            continue
-                        set_to_blow[i][j] = '.'
+                            pass
+                        if j >= 1:
+                            temp[i][j-1] = '.'
                         try:
-                            set_to_blow[i+1][j] = '.'
+                            temp[i][j+1] = '.'
                         except IndexError:
-                            continue
-                        try:
-                            set_to_blow[i][j-1] = '.'
-                        except IndexError:
-                            continue
-                        try:
-                            set_to_blow[i][j+1] = '.'
-                        except IndexError:
-                            continue
-                
-                        
-                            
-            
+                            pass
+            set_to_blow = temp[:]
+        answer = []
+        for i in set_to_blow:
+            answer.append(''.join(i))
+        return answer
+
+print(bomberMan(5, ['.......','...O.O.','....O..','..O....','OO...OO','OO.O...']))
